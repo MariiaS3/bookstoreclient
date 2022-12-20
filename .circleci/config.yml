@@ -1,0 +1,83 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install
+          command: npm ci
+      - run:
+          name: Test
+          command: npm test
+  heroku_deploy_review_app:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/deploy-via-git:
+          app-name: $HEROKU_APP_NAME
+          api-key: $HEROKU_API_KEY
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - heroku/deploy-via-git:
+          requires:
+            - test
+
+# version: '2.1'
+# orbs:
+#   node: circleci/node@4.7.0
+
+# jobs:
+#   test:
+#     executor:
+#       name: node/default
+#       tag: '14.17.6'
+#     steps:
+#       - checkout
+#       - node/install-packages
+#       - run:
+#           command: npm run test
+      
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/node:7.10 
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm test
+#   heroku_deploy_review_app:
+#     executor: heroku/default
+#     steps:
+#       - checkout
+#       - heroku/deploy-via-git:
+#           app-name: $HEROKU_APP_NAME
+#           api-key: $HEROKU_API_KEY
+
+# workflows:
+#   heroku_deploy:
+#     jobs:
+#       - heroku/deploy-via-git
