@@ -1,7 +1,7 @@
 import React from "react";
 import Proptypes from 'prop-types';
 import { Box } from "@mui/material";
-import makeStyles from "./BookStyles";
+import styled from "./BookStyles";
 
 const propTypes = {
     books:Proptypes.arrayOf(Proptypes.shape({
@@ -13,7 +13,7 @@ const propTypes = {
 }
 
 const BookList = ({books}) =>{
-    const classes = makeStyles();
+    const classes = styled();
 
     return (
         <Box className={classes.bookList}>

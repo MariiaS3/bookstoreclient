@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
-import Axios from 'axios';
+import axios from 'axios';
 import getBooksAction from '../bookAction';
 
 jest.mock('axios');
@@ -11,7 +11,7 @@ describe('BookActions',() =>{
     it('should able to dispatch success action', async () => {
         const store = mockStore({});
 
-        Axios.get.mockImplementation(() => Promise.resolve({data: [{
+        axios.get.mockImplementation(() => Promise.resolve({data: [{
             id: 1,
             title: 'test title',
             description: 'dec',

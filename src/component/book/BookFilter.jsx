@@ -1,10 +1,10 @@
 import { Box, Paper } from "@mui/material";
 import React from "react";
-import styles from './BookStyles';
+import styled from './BookStyles';
 
 
 const BookFilter = () =>{
-    const classes = styles();
+    const classes = styled();
     return (
         <Box className={classes.bookFilter}>
             <Paper className={classes.bookFilterPaper}>

@@ -2,7 +2,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import BookFilter from "./BookFilter";
-import styles from "./BookStyles"
+import styled from "./BookStyles"
 import { useDispatch, useSelector } from "react-redux";
 import { getBooksSelector } from "../../module/book/bookSelector";
 import getBooksAction from "../../module/book/bookAction";
@@ -17,7 +17,7 @@ const BookContainer = () =>{
     },[dispatch])
 
     const books = useSelector(getBooksSelector);
-    const  classes = styles();
+    const  classes = styled();
     // console.log(books);
     return (
         <Box className={classes.bookContainer}>

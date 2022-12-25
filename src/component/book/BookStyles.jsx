@@ -1,7 +1,7 @@
-import { createStyles, makeStyles } from "@mui/material";
+// import { createStyles, makeStyles } from "@mui/styles";
+import {styled } from "@mui/system"
 
-
-export default makeStyles(() => createStyles({
+export default styled(() => ({
     bookContainer:{
         display:'flex',
         justifyContent:'center',
