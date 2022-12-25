@@ -1,8 +1,8 @@
 import React from "react";
 import Proptypes from 'prop-types';
 import { Box } from "@mui/material";
-import styled from "./BookStyles";
 
+import "./book.css"
 const propTypes = {
     books:Proptypes.arrayOf(Proptypes.shape({
         id: Proptypes.number.isRequired,
@@ -13,10 +13,9 @@ const propTypes = {
 }
 
 const BookList = ({books}) =>{
-    const classes = styled();
 
     return (
-        <Box className={classes.bookList}>
+        <Box className="bookList">
             {books.map((book) => <div key={book.id}>{book.id}</div>)}
         </Box>
     )

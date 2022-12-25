@@ -1,13 +1,12 @@
 import { Box, Paper } from "@mui/material";
 import React from "react";
-import styled from './BookStyles';
-
+import "./book.css"
 
 const BookFilter = () =>{
-    const classes = styled();
+
     return (
-        <Box className={classes.bookFilter}>
-            <Paper className={classes.bookFilterPaper}>
+        <Box className="bookFilter">
+            <Paper className="bookFilterPaper">
                 Book filter
             </Paper>
         </Box>
