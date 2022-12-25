@@ -15,5 +15,16 @@
 }
 
 .bookList {
-    width: 80%
+    width: 80%;
+}
+
+.bookListItemPaper{
+    padding: 10px;
+    display: flex;
+    width: 80%;
+}
+
+.bookImage {
+    width: 200px;
+    height: 200px;
 }

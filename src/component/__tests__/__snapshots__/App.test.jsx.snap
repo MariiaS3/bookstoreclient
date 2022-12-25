@@ -41,7 +41,7 @@ exports[`App component should render app with error 1`] = `
           class="bookList MuiBox-root css-0"
         >
           <div
-            class="bookList MuiBox-root css-0"
+            class="bookList MuiBox-root css-d0uhtl"
           />
         </div>
       </div>
