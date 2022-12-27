@@ -1,18 +1,34 @@
-import getBookService from './bookService'
+import {getBookService, getBooksByTitleService} from './bookService'
 
-const getBooksAction = () => async (dispath) => {
+
+export const getBooksByTitle= (title) => async (dispatch) => {
+    try{
+        dispatch({ type: 'BOOKLISTPENDING' });
+        const books = await getBooksByTitleService(title);
+        dispatch({
+            type:'BOOKSBYTITLE',
+            payload: books.data
+        });
+        dispatch({ type: 'BOOKLISTFULFILLED' });
+    }catch (error) {
+        dispatch({ type: 'BOOKLISTERROR' });
+    }
+
+}
+
+export const getBooksAction = () => async (dispatch) => {
     try {
-        dispath({ type: 'BOOKLISTPENDING' });
+        dispatch({ type: 'BOOKLISTPENDING' });
         const books = await getBookService();
-        dispath({
+        dispatch({
             type: 'BOOKLIST',
             payload: books.data
         })
-        dispath({ type: 'BOOKLISTFULFILLED' });
+        dispatch({ type: 'BOOKLISTFULFILLED' });
 
     } catch (error) {
-        dispath({ type: 'BOOKLISTERROR' });
+        dispatch({ type: 'BOOKLISTERROR' });
     }
 }
 
-export default getBooksAction;
+// export default getBooksAction;
