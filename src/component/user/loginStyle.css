@@ -1,0 +1,13 @@
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.paper{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
