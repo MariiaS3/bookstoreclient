@@ -1,10 +1,12 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import * as yup from "yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../module/user/userAction";
 import './loginStyle.css'
+import { getUserPromise } from "../../module/user/userSelector";
+import { useSnackbar } from "notistack";
 
 
 const validationSchema = yup.object({
@@ -19,6 +21,20 @@ const validationSchema = yup.object({
 const Login = () => {
 
     const dispatch = useDispatch();
+    const loginPromise = useSelector(getUserPromise);
+    const { enqueueSnackbar } = useSnackbar();
+
+    useEffect(() =>{
+        if(loginPromise.isErrorOcurred){
+            enqueueSnackbar('Username and password wrong!',{
+                variant: 'error'
+            });
+        }else if(loginPromise.isFulfielled){
+            enqueueSnackbar('Login Success',{
+                variant: 'success'
+            })
+        }
+    })
 
     const formik = useFormik({
         initialValues: {
@@ -35,35 +51,36 @@ const Login = () => {
             <Box className="wrapper">
                 <Paper className="paper">
                     <Typography variant="h4"> Book Store Login</Typography>
-                    <TextField 
-                        style={{'marginTop': '2rem'}}
-                        name="email" 
-                        id="email" 
-                        data-testid="email=testid" 
-                        label="Enter email address" 
-                        placeholder="Enther email address" 
+                    <TextField
+                        style={{ 'marginTop': '2rem' }}
+                        name="email"
+                        id="email"
+                        data-testid="email=testid"
+                        label="Enter email address"
+                        placeholder="Enther email address"
                         variant="outlined"
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         helperText={formik.touched.email && formik.errors.email}
                         error={formik.touched.email && Boolean(formik.errors.email)} />
-                    <TextField 
-                        style={{'marginTop': '2rem'}}
-                        name="password" 
-                        id="password"  
-                        data-testid="password=testid" 
-                        label="Enter password" 
-                        variant="outlined" 
-                        placeholder="Enther password" 
+                    <TextField
+                        style={{ 'marginTop': '2rem' }}
+                        name="password"
+                        id="password"
+                        data-testid="password=testid"
+                        label="Enter password"
+                        variant="outlined"
+                        placeholder="Enther password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         helperText={formik.touched.password && formik.errors.password}
                         error={formik.touched.password && Boolean(formik.errors.password)} />
-                    <Button 
-                        style={{'marginTop': '2rem'}} 
-                        type="submit" 
-                        variant="contained" 
-                        color="primary">
+                    <Button
+                        style={{ 'marginTop': '2rem' }}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disabled={loginPromise.isPending}>
                         Login
                     </Button>
                 </Paper>

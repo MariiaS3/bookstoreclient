@@ -4,6 +4,7 @@ import React from "react";
 import Layout from "./layout/Layout";
 import BookContainer from "./book/BookContainer";
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom';
+import { SnackbarProvider } from "notistack";
 import Login from "./user/Login";
 
 const App = () => {
@@ -13,15 +14,17 @@ const App = () => {
     // });
 
     return (
+        <SnackbarProvider maxSnack={3}>
             <Router>
                 <Layout>
                     <Switch>
                         <Route path="/login" element={<Login />} />
-                        <Route exact path="/" element={ <BookContainer />} />
-                            {/* <div>My first component</div> */}
+                        <Route exact path="/" element={<BookContainer />} />
+                        {/* <div>My first component</div> */}
                     </Switch>
                 </Layout>
             </Router>
+        </SnackbarProvider>
     );
 }
 

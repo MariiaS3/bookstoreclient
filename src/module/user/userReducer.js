@@ -18,6 +18,36 @@ const userReducer = (state = USER_IMITIAL_STATE, action) =>{
                 token: action.payload.token
             }
         }
+        case 'USER_PENDING': {
+            return {
+                ...state,
+                promise: {
+                    isPending: true,
+                    isFullfilled: false,
+                    isErrorOcurred: false
+                }
+            }
+        }
+        case 'USER_SUCCES': {
+            return {
+                ...state,
+                promise: {
+                    isPending: false,
+                    isFullfilled: true,
+                    isErrorOcurred: false
+                }
+            }
+        }
+        case 'USER_ERROR': {
+            return {
+                ...state,
+                promise: {
+                    isPending: false,
+                    isFullfilled: false,
+                    isErrorOcurred: true
+                }
+            }
+        }
         default: {
             return state;
         }
