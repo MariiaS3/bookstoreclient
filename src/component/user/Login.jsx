@@ -15,7 +15,7 @@ const validationSchema = yup.object({
         .email('Enter a valid email')
         .required('Email is required'),
     password: yup.string('Enter your password')
-        .min(8, 'password should be of minimum 8 char length')
+        .min(8, 'Password should be of minimum 8 char length')
         .required('Password is required')
 })
 
@@ -24,7 +24,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const loginPromise = useSelector(getUserPromise);
     const { enqueueSnackbar } = useSnackbar();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() =>{
         console.log()
@@ -36,7 +36,7 @@ const Login = () => {
             enqueueSnackbar('Login Success',{
                 variant: 'success'
             })
-            navigate("/");
+            // navigate("/");
         }
     },[loginPromise, enqueueSnackbar])
 
@@ -61,7 +61,7 @@ const Login = () => {
                         id="email"
                         data-testid="email=testid"
                         label="Enter email address"
-                        placeholder="Enther email address"
+                        placeholder="Enter email address"
                         variant="outlined"
                         value={formik.values.email}
                         onChange={formik.handleChange}
@@ -74,7 +74,7 @@ const Login = () => {
                         data-testid="password=testid"
                         label="Enter password"
                         variant="outlined"
-                        placeholder="Enther password"
+                        placeholder="Enter password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         helperText={formik.touched.password && formik.errors.password}
