@@ -34,7 +34,7 @@ const Login = () => {
             enqueueSnackbar('Login Success',{
                 variant: 'success'
             })
-            window.location.redirect('/')
+            window.location.assign('/')
         }
     },[loginPromise, enqueueSnackbar])
 
@@ -50,13 +50,13 @@ const Login = () => {
     })
 
     const handleRegister = () =>{
-        navigate("/register");
+        window.location.assign("/register");
     }
 
     return (
         <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Box className="wrapper">
-                <Paper className="paper">
+                <Paper className="paperLogin">
                     <Typography variant="h4"> Book Store Login</Typography>
                     <TextField
                         style={{ 'marginTop': '2rem' }}

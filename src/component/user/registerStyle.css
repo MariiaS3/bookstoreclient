@@ -3,7 +3,7 @@
     margin: auto;
 }
 
-.paper{
+.paperRegister{
     display: flex;
     flex-direction: column;
     margin-top: 50px;

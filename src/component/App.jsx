@@ -18,7 +18,7 @@ const App = () => {
                     <Switch>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-                        <Route exact path="/" element={ <BookContainer element={<Auth />}/> } />
+                        <Route exact path="/" element={<><Auth> <BookContainer /> </Auth></> } />
                         {/* <div>My first component</div> */}
                     </Switch>
                 </Layout>

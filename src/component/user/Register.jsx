@@ -37,7 +37,7 @@ const Register = () => {
             enqueueSnackbar('User Added Successfully',{
                 variant: 'success'
             })
-            window.location.redirect("/login")
+            window.location.assign("/login")
         }
     },[registerPromise, enqueueSnackbar])
 
@@ -56,7 +56,7 @@ const Register = () => {
     return (
         <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Box className="wrapper">
-                <Paper className="paper">
+                <Paper className="paperRegister">
                     <Typography variant="h4" className="heading"> User Registration</Typography>
                     <TextField
                         style={{ 'marginTop': '2rem' }}

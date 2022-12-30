@@ -1,16 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getUserToken } from "../../module/user/userSelector";
 
 
 const Auth =({children}) =>{
-    const navigate = useNavigate();
+
     const token = useSelector(getUserToken);
 
     const getView = () => {
         if(!token){
-            navigate('/login')
+            window.location.assign("/login")
         }
         return children;
     }

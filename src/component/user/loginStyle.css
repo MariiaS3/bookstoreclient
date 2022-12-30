@@ -4,7 +4,7 @@
     justify-content: center;
 }
 
-.paper{
+.paperLogin{
     display: flex;
     flex-direction: column;
     padding: 20px;
