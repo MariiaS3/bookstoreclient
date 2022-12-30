@@ -7,9 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../module/user/userAction";
 import './registerStyle.css'
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
 import { getUserRegisterPromise } from "../../module/user/userSelector";
-
 
 const validationSchema = yup.object({
     name: yup.string('Enter your username')
@@ -24,10 +22,9 @@ const validationSchema = yup.object({
 
 
 const Register = () => {
-
+    
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-    const navigate = useNavigate();
     const registerPromise = useSelector(getUserRegisterPromise);
 
     useEffect(() =>{
@@ -40,7 +37,7 @@ const Register = () => {
             enqueueSnackbar('User Added Successfully',{
                 variant: 'success'
             })
-            navigate("/login");
+            window.location.redirect("/login")
         }
     },[registerPromise, enqueueSnackbar])
 

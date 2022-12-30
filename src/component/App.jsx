@@ -11,10 +11,6 @@ import Register from "./user/Register";
 
 const App = () => {
 
-    // Axios(`${baseUrl}/api/v1/books`).then(books =>{
-    //     // console.log(books);
-    // });
-
     return (
         <SnackbarProvider maxSnack={3}>
             <Router>

@@ -7,8 +7,6 @@ import { loginAction } from "../../module/user/userAction";
 import './loginStyle.css'
 import { getUserPromise } from "../../module/user/userSelector";
 import { useSnackbar } from "notistack";
-// import { useHistory } from "react-router-dom"
-import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
     email: yup.string('Enter your email')
@@ -19,12 +17,12 @@ const validationSchema = yup.object({
         .required('Password is required')
 })
 
-const Login = () => {
 
+const Login = () => {
+    
     const dispatch = useDispatch();
     const loginPromise = useSelector(getUserPromise);
     const { enqueueSnackbar } = useSnackbar();
-    const navigate = useNavigate();
 
     useEffect(() =>{
         console.log()
@@ -36,7 +34,7 @@ const Login = () => {
             enqueueSnackbar('Login Success',{
                 variant: 'success'
             })
-            navigate("/");
+            window.location.redirect('/')
         }
     },[loginPromise, enqueueSnackbar])
 
@@ -92,7 +90,7 @@ const Login = () => {
                         disabled={loginPromise.isPending}>
                         Login
                     </Button>
-                    <Link component="button" variant="body2" onClick={handleRegister}>Register</Link>
+                    <Link style={{ 'marginTop': '2rem' }} component="button" variant="body2" onClick={handleRegister}>Register</Link>
                 </Paper>
             </Box>
         </form>
