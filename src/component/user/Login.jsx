@@ -1,4 +1,4 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Link, Paper, TextField, Typography } from "@mui/material";
 import * as yup from "yup";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
@@ -50,6 +50,11 @@ const Login = () => {
             dispatch(loginAction(values.email, values.password));
         }
     })
+
+    const handleRegister = () =>{
+        navigate("/register");
+    }
+
     return (
         <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Box className="wrapper">
@@ -87,6 +92,7 @@ const Login = () => {
                         disabled={loginPromise.isPending}>
                         Login
                     </Button>
+                    <Link component="button" variant="body2" onClick={handleRegister}>Register</Link>
                 </Paper>
             </Box>
         </form>

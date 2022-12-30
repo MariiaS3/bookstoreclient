@@ -6,7 +6,9 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../module/user/userAction";
 import './registerStyle.css'
-
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
+import { getUserRegisterPromise } from "../../module/user/userSelector";
 
 
 const validationSchema = yup.object({
@@ -24,6 +26,23 @@ const validationSchema = yup.object({
 const Register = () => {
 
     const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate();
+    const registerPromise = useSelector(getUserRegisterPromise);
+
+    useEffect(() =>{
+        console.log()
+        if(registerPromise.isErrorOcurred){
+            enqueueSnackbar('Server error occured!',{
+                variant: 'error'
+            });
+        }else if(registerPromise.isFullfilled){
+            enqueueSnackbar('User Added Successfully',{
+                variant: 'success'
+            })
+            navigate("/login");
+        }
+    },[registerPromise, enqueueSnackbar])
 
     const formik = useFormik({
         initialValues: {
