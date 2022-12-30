@@ -1,6 +1,6 @@
 
-export const USER_IMITIAL_STATE = {
-    token: '',
+export const INITIAL_USER_STATE = {
+    token: window.localStorage.getItem('bookstore-token'),
     promise: {
         isPending: false,
         isFullfilled: false,
@@ -9,7 +9,7 @@ export const USER_IMITIAL_STATE = {
 } 
 
 
-const userReducer = (state = USER_IMITIAL_STATE, action) =>{
+const userReducer = (state = INITIAL_USER_STATE, action) =>{
     //return new state when 'USER_LOGIN' action dispatch
     switch(action.type){
         case 'USER_LOGIN':{
@@ -28,7 +28,7 @@ const userReducer = (state = USER_IMITIAL_STATE, action) =>{
                 }
             }
         }
-        case 'USER_SUCCES': {
+        case 'USER_SUCCESS': {
             return {
                 ...state,
                 promise: {

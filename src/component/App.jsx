@@ -6,6 +6,7 @@ import BookContainer from "./book/BookContainer";
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom';
 import { SnackbarProvider } from "notistack";
 import Login from "./user/Login";
+import Auth from "./Auth";
 
 const App = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
                 <Layout>
                     <Switch>
                         <Route path="/login" element={<Login />} />
-                        <Route exact path="/" element={<BookContainer />} />
+                        <Route exact path="/" element={ <BookContainer element={<Auth />}/> } />
                         {/* <div>My first component</div> */}
                     </Switch>
                 </Layout>

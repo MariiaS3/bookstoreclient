@@ -7,7 +7,8 @@ import { loginAction } from "../../module/user/userAction";
 import './loginStyle.css'
 import { getUserPromise } from "../../module/user/userSelector";
 import { useSnackbar } from "notistack";
-
+// import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
     email: yup.string('Enter your email')
@@ -23,18 +24,21 @@ const Login = () => {
     const dispatch = useDispatch();
     const loginPromise = useSelector(getUserPromise);
     const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate();
 
     useEffect(() =>{
+        console.log()
         if(loginPromise.isErrorOcurred){
             enqueueSnackbar('Username and password wrong!',{
                 variant: 'error'
             });
-        }else if(loginPromise.isFulfielled){
+        }else if(loginPromise.isFullfilled){
             enqueueSnackbar('Login Success',{
                 variant: 'success'
             })
+            navigate("/");
         }
-    })
+    },[loginPromise, enqueueSnackbar])
 
     const formik = useFormik({
         initialValues: {

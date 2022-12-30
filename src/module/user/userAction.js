@@ -1,4 +1,4 @@
-import React from "react";
+
 import { login } from "./userService";
 
 
@@ -13,9 +13,8 @@ export const loginAction = (email, password) => async (dispatch) => {
         dispatch({
             type: 'USER_LOGIN',
             payload: response.data
-        })
+        });
         dispatch({ type: 'USER_SUCCESS' });
-
     } catch {
         dispatch({ type: 'USER_ERROR' });
     }
