@@ -25,6 +25,7 @@ exports[`App component should render app with error 1`] = `
     <div
       class="MuiBox-root css-1afphko"
     >
+       
       <div
         class="bookContainer MuiBox-root css-0"
       >
@@ -110,6 +111,7 @@ exports[`App component should render app with error 1`] = `
           />
         </div>
       </div>
+       
     </div>
   </div>
 </DocumentFragment>
