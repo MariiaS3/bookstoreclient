@@ -1,16 +1,17 @@
+
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import * as yup from "yup";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../../module/user/userAction";
-import './loginStyle.css'
-import { getUserPromise } from "../../module/user/userSelector";
-import { useSnackbar } from "notistack";
-// import { useHistory } from "react-router-dom"
-import { useNavigate } from "react-router-dom";
+import { registerAction } from "../../module/user/userAction";
+import './registerStyle.css'
+
+
 
 const validationSchema = yup.object({
+    name: yup.string('Enter your username')
+        .required('Username is required'),
     email: yup.string('Enter your email')
         .email('Enter a valid email')
         .required('Email is required'),
@@ -19,47 +20,43 @@ const validationSchema = yup.object({
         .required('Password is required')
 })
 
-const Login = () => {
+
+const Register = () => {
 
     const dispatch = useDispatch();
-    const loginPromise = useSelector(getUserPromise);
-    const { enqueueSnackbar } = useSnackbar();
-    const navigate = useNavigate();
-
-    useEffect(() =>{
-        console.log()
-        if(loginPromise.isErrorOcurred){
-            enqueueSnackbar('Username and password wrong!',{
-                variant: 'error'
-            });
-        }else if(loginPromise.isFullfilled){
-            enqueueSnackbar('Login Success',{
-                variant: 'success'
-            })
-            navigate("/");
-        }
-    },[loginPromise, enqueueSnackbar])
 
     const formik = useFormik({
         initialValues: {
+            name: '',
             email: '',
-            password: ''
+            password: '',
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            dispatch(loginAction(values.email, values.password));
+            dispatch(registerAction(values));
         }
     })
+
     return (
         <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Box className="wrapper">
                 <Paper className="paper">
-                    <Typography variant="h4"> Book Store Login</Typography>
+                    <Typography variant="h4" className="heading"> User Registration</Typography>
+                    <TextField
+                        style={{ 'marginTop': '2rem' }}
+                        name="name"
+                        id="name"
+                        label="Enter username"
+                        placeholder="Enter username"
+                        variant="outlined"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        helperText={formik.touched.name && formik.errors.name}
+                        error={formik.touched.name && Boolean(formik.errors.name)} />
                     <TextField
                         style={{ 'marginTop': '2rem' }}
                         name="email"
                         id="email"
-                        data-testid="email=testid"
                         label="Enter email address"
                         placeholder="Enter email address"
                         variant="outlined"
@@ -71,7 +68,6 @@ const Login = () => {
                         style={{ 'marginTop': '2rem' }}
                         name="password"
                         id="password"
-                        data-testid="password=testid"
                         label="Enter password"
                         variant="outlined"
                         placeholder="Enter password"
@@ -79,19 +75,21 @@ const Login = () => {
                         onChange={formik.handleChange}
                         helperText={formik.touched.password && formik.errors.password}
                         error={formik.touched.password && Boolean(formik.errors.password)} />
+                    <div id="btn">
                     <Button
                         style={{ 'marginTop': '2rem' }}
                         type="submit"
                         variant="contained"
-                        color="primary"
-                        disabled={loginPromise.isPending}>
-                        Login
+                        color="primary" 
+                        className="btn">
+                        Register
                     </Button>
+                    </div>
                 </Paper>
             </Box>
         </form>
-    );
+    )
 }
 
-export default Login;
 
+export default Register;

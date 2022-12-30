@@ -1,5 +1,5 @@
 
-import { login } from "./userService";
+import { login, registerApi } from "./userService";
 
 
 export const loginAction = (email, password) => async (dispatch) => {
@@ -17,5 +17,26 @@ export const loginAction = (email, password) => async (dispatch) => {
         dispatch({ type: 'USER_SUCCESS' });
     } catch {
         dispatch({ type: 'USER_ERROR' });
+    }
+}
+
+export const registerAction =(user) => async (dispatch) =>{
+    try{
+        dispatch({ type: 'USER_REGISTER_PENDING' });
+
+        const response = await registerApi(user);
+
+        dispatch({
+            type: 'USER_REGISTER',
+            payload:{
+                id: response.data,
+                ...user
+            }
+        });
+
+        dispatch({ type: 'USER_REGISTER_SUCCESS' });
+
+    }catch(error){
+        dispatch({ type: 'USER_REGISTER_ERROR' });
     }
 }

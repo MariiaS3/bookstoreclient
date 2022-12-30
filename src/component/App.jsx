@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-d
 import { SnackbarProvider } from "notistack";
 import Login from "./user/Login";
 import Auth from "./Auth";
+import Register from "./user/Register";
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
                 <Layout>
                     <Switch>
                         <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
                         <Route exact path="/" element={ <BookContainer element={<Auth />}/> } />
                         {/* <div>My first component</div> */}
                     </Switch>
