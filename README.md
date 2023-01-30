@@ -1,5 +1,27 @@
 # Getting Started with Create React App
 
+This is a project I did while learning application deployment.
+The backend for this frontend is the bookstore repository
+
+<h2>Technologies</h2>
+  
+  <h4>Frontend</h4>
+  
+```
+  * JavaScript
+  * React
+  * MUI
+  * Redux
+```
+
+<h4>CI/CD</h4>
+
+```
+  * Heroku
+  * Circleci
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
